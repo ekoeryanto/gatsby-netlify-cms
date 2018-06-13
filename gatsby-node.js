@@ -93,7 +93,7 @@ exports.modifyWebpackConfig = ({config}) => {
           {
             module: 'netlify-cms',
             entry: ['dist/cms.css', 'dist/cms.js'],
-            global: 'CMS'
+            global: 'CMS',
           }
         ]
       })
