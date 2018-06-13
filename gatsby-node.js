@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
@@ -82,4 +83,22 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
       value,
     })
   }
+}
+
+exports.modifyWebpackConfig = ({config}) => {
+  config.merge({
+    plugins: [
+      new HtmlWebpackExternalsPlugin({
+        externals: [
+          {
+            module: 'netlify-cms',
+            entry: ['dist/cms.css', 'dist/cms.js'],
+            global: 'CMS'
+          }
+        ]
+      })
+    ]
+  })
+
+  return config
 }
